@@ -6,7 +6,7 @@ development:
   <<: *default
   host: localhost
   user: postgres
-  password: changeme
+  password: password
   database: cafeteria_db
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
