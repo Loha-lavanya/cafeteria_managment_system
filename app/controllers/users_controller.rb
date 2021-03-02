@@ -10,7 +10,6 @@ class UsersController < ApplicationController
       role: "user",
       password: params[:password],
     )
-    render User.all
     redirect_to "/"
   end
 end

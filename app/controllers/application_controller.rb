@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   #skip_before_action :ensure_user_logged_in
 
+  def set_theme
+    @current_theme ||= "full"
+  end
+
   def ensure_user_logged_in
     unless current_user
       redirect_to "/"

@@ -1,0 +1,10 @@
+<div class="full-height scroll-bar">
+  <ul id="slide-out" class="side-nav fixed rel">
+    <h1 center>CATEGORIES</h1>
+    <% @categories = @categories.nil? ? MenuCategory.all : @categories %>
+    <% @categories.each do |category| %>
+      <li><%= link_to category.name, menu_category_path(category) %></li>
+   <% end %>
+
+  </ul>
+</div>
