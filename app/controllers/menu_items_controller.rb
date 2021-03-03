@@ -3,20 +3,11 @@ class MenuItemsController < ApplicationController
   # GET /menu_items
   def index
     @menu_items = MenuItem.all.order(created_at: :asc)
-    # render template: "menu_items/index"
   end
 
   # GET /menu_items/id
   def show
     @menu_item = MenuItem.find params[:id]
-=begin
-    if @menu_item.food_view == nil
-      @menu_item.food_view = 1
-    else
-      @menu_item.food_view += 1
-    end
-    @menu_item.save
-=end
   end
 
   #GET /menu_items/new
@@ -35,19 +26,30 @@ class MenuItemsController < ApplicationController
     if menu_item
       menu_item.destroy
       flash[:success] = "#{menu_item.name} has been deleted."
-      #redirect_to "/"
+      redirect_to menu_items_path
     else
       flash[:error] = "An error occured. Try deleting #{@menu_item.name} again."
     end
   end
-=begin
+
   def update
     @menu_item = MenuItem.find(params[:id])
     if @menu_item
-       save_menu_item
+      save_menu_item
     else
       flash[:error] = "An error occured. Try adding #{@menu_item.name} again."
     end
+    redirect_to menu_items_path
   end
-=end
+
+  def create
+    @menu_item = MenuItem.create(menu_item_params)
+    redirect_to menu_items_path
+  end
+
+  private
+
+  def menu_item_params
+    params.require(:menu_item).permit(:menu_category_id, :name, :description, :price, :menu_item_image)
+  end
 end

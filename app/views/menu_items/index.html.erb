@@ -4,33 +4,36 @@
 
 <div class="panel header-panel flow-text z-depth-3">
 <%= (!@category.nil?) ? @category.name : "ITEMS"  %>
+<li><%=link_to "CART", cart_path(@current_cart) %></li>
 </div>
 
 <div class="row">
- <% @menu_items = (!@category.nil?) ? @category.menu_items : @menu_items  %>
-  <% @menu_items.each do |menu_item| %>
-    <div class="col s12 m6 l4">
-     <div class="card">
-        <div class="card-image">
-           <span class="activator">
-           <p> </p>
-           </span>
-            <%= link_to(menu_item) do %>
-              <%= image_tag(("coffee.jpg"), :width => "100%", :height => "auto", :style => "max-width:100%", :class => "image-thumb") %>
-             <span class="card-title"><%= menu_item.name %></span>
 
-              <% end %>
+<% @menu_items = (!@category.nil?) ? @category.menu_items : @menu_items  %>
+<% @menu_items.each do |menu_item| %>
+<div class="col s12 m6 l4">
+  <div class="card">
+    <div class="card-image">
+        <span class="activator">
+        <p> </p>
+        </span>
+        <%= link_to(menu_item) do %>
+        <%= image_tag(("food.jpg"), :width => "50%", :height => "auto", :style => "max-width:25%", :class => "image-thumb") %>
+          <br>
+          <span class="card-title"><%= menu_item.name %></span>
 
-        </div>
+          <% end %>
 
-         <div class="card-action">
-           <%= button_to "Add to cart", cart_items_path(menu_item_id: menu_item.id) %>
-        </div>
+    </div>
 
-       </div>
-      </div>
+      <div class="card-action">
+        <%= button_to "Add to cart", cart_items_path(menu_item_id: menu_item.id), method: :post %>
+    </div>
+
+    </div>
+  </div>
 <% end %>
 
-  </div>
- </div>
+</div>
+</div>
 </div>

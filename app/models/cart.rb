@@ -1,31 +1,12 @@
 class Cart < ApplicationRecord
+  has_many :cart_items, dependent: :destroy
+  has_many :menu_items, through: :cart_items
 
-  def initialize(cart_data)
-  if cart_data
-    @cart_data = cart_data
-  else
-      @cart_data={}
-	end
-
-  #getter method
-  def cart_data
-    @cart_data
+  def sub_total
+    sum = 0
+    self.cart_items.each do |cart_item|
+      sum += cart_item.total_price
+    end
+    return sum
   end
-
-  def destroy
-	  @cart_data = nil
-	end
-
-  def delete
-		@cart_data[items_id] = 0
-	end
-
-  def increment(item_id)
-    # || =  if cart_data[item_id] == nothing   cart_data[item_id]=0
-    # else  cart_data[item_id]=cart_data[item_id]
-    @cart_data[item_id] ||= 0
-    @cart_data[item_id] += 1
-  end
-
-
 end
