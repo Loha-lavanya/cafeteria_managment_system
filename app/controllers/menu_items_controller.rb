@@ -1,4 +1,6 @@
 class MenuItemsController < ApplicationController
+  before_action :ensure_cart_created
+  before_action :ensure_user_logged_in
 
   # GET /menu_items
   def index

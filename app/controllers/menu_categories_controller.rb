@@ -1,7 +1,6 @@
 class MenuCategoriesController < ApplicationController
   def index
     @categories = MenuCategory.all
-    render "/app/views/layouts/_menu_category.html.erb"
   end
 
   def new

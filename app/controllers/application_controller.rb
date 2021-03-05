@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
-  #before_action :ensure_user_logged_in
   before_action :current_cart
+
+  def check_if_admin
+    unless current_user && current_user.role == "admin"
+      flash[:danger] = "Your'e not admin."
+      redirect_to "/"
+    end
+  end
+
+  def is_admin?
+    current_user && current_user.role == "admin"
+  end
 
   def ensure_user_logged_in
     unless current_user
@@ -33,8 +43,14 @@ class ApplicationController < ActionController::Base
     if current_cart_id
       @current_cart = Cart.find(current_cart_id)
     else
-      @current_cart = Cart.create
+      @current_cart = Cart.create(:user_id => session[:current_user_id])
+      @current_cart.save
       session[:current_cart_id] = @current_cart.id
     end
+  end
+
+  def order_created
+    @order = Order.new(:date => Time.now, :user_id => session[:current_user_id])
+    @order.save
   end
 end

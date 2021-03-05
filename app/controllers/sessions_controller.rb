@@ -5,17 +5,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    #authenticate method checks the password is true or not
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:current_user_id] = user.id
-      redirect_to "/menu"
-    else
-      render plain: "YOu have entered incorrect password"
-    end
-  end
 
-  def index
+      if user.role == "admin"
+        redirect_to "/admin"
+      else
+        redirect_to "/menu"
+      end
+    else
+      flash[:error] = "Something went wrong! Try Again"
+      redirect_to new_sessions_path
+    end
   end
 
   def destroy
@@ -24,3 +26,13 @@ class SessionsController < ApplicationController
     redirect_to "/"
   end
 end
+
+=begin
+  <div class="container">
+<% if flash[:error] %>
+  <div class="alert alert-danger"><%= flash[:error] %></div>
+<% end %>
+<% if flash[:success] %>
+  <div class="alert alert-success"><%= flash[:success] %></div>
+<% end %>
+=end
