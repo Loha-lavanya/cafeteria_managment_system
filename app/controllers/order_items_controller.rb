@@ -17,6 +17,6 @@ class OrderItemsController < ApplicationController
     Cart.destroy(session[:current_cart_id])
     session[:current_cart_id] = nil
     #redirect_to menu_items_path
-    render plain: <h1>"Succesfully Ordered!"<h1>
+    render plain: "Succesfully Placed Your Order"
   end
 end
