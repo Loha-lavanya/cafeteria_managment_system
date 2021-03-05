@@ -26,13 +26,3 @@ class SessionsController < ApplicationController
     redirect_to "/"
   end
 end
-
-=begin
-  <div class="container">
-<% if flash[:error] %>
-  <div class="alert alert-danger"><%= flash[:error] %></div>
-<% end %>
-<% if flash[:success] %>
-  <div class="alert alert-success"><%= flash[:success] %></div>
-<% end %>
-=end
