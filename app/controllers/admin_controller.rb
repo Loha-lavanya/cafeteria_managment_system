@@ -19,6 +19,5 @@ class AdminController < ApplicationController
 
   def category
     @menu_categories = MenuCategory.all
-    #render plain: "categoty"
   end
 end

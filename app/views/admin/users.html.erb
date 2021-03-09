@@ -1,6 +1,7 @@
 
-<div>
-<h1 align="center"> ALL USERS  <h1>
+
+</div>
+<h3 align="center"><b> ALL USERS  </b><h3>
 </div>
 <div>
 <table class="table table-striped">
@@ -9,6 +10,7 @@
     <th scope="col">id</th>
     <th scope="col">name</th>
     <th scope="col">email</th>
+    <th colspan="1">
   </tr>
 </thead>
 <tbody>
@@ -17,10 +19,12 @@
     <td><%= user.id %></td>
     <td><%= user.name %></td>
     <td><%= user.email %></td>
+    <td><%= button_to " - ", user_path(:id => user.id), method: :delete %></td>
 
   </tr>
 <% end %>
 </tbody>
 </table>
 </div>
-<%= link_to "Back", admin_dashboard_path,class:"btn btn-dark" %>
+
+<%= link_to "Back", admin_dashboard_path,class:"btn btn-primary btn-lg" %>

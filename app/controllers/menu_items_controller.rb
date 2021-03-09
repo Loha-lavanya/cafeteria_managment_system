@@ -1,23 +1,20 @@
 class MenuItemsController < ApplicationController
   before_action :ensure_cart_created
   before_action :ensure_user_logged_in
+  before_action :check_if_admin, only: [:create]
 
-  # GET /menu_items
   def index
     @menu_items = MenuItem.all.order(created_at: :asc)
   end
 
-  # GET /menu_items/id
   def show
     @menu_item = MenuItem.find params[:id]
   end
 
-  #GET /menu_items/new
   def new
     @menu_item = MenuItem.new
   end
 
-  # GET /menu_items/id/edit
   def edit
     @menu_item = MenuItem.find(params[:id])
     render template: "menu_items/new"

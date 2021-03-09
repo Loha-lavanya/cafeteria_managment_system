@@ -10,18 +10,16 @@ class UsersController < ApplicationController
     if existing_user
       flash[:error] = "User Already Exists"
     else
+      #@user = User.new(params[:user])
       user = User.create!(
         name: params[:name],
         email: params[:email],
         role: "user",
         password: params[:password],
       )
+      UserMailer.signup_confirmation(user).deliver
     end
     redirect_to "/"
-  end
-
-  def edit
-    #@user = User.find(params[:id])
   end
 
   def edit
@@ -29,18 +27,29 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      flash[:success] = "Profile Successfully Updated"
-    else
-      render "edit"
+    @user = User.find_by(id: params[:id])
+    #user = User.find(@current_user.id)
+    # @user = User.find(params[:id])
+
+    @user.name = params[:name]
+    @user.email = params[:email]
+    @user.password_digest = params[:password_digest]
+    @user.save
+=begin
+    if @user.save
+      #render plain: user.name
+      #flash[:success] = "Profile Successfully Updated"
     end
+=end
     redirect_to menu_items_path
   end
 
-  private
+  def show
+    @user = User.find(params[:id])
+  end
 
-  def user_params
-    params.require(:user).permit(:name, :email, :password_digest)
+  def destroy
+    user = User.find(params[:id])
+    User.destroy(user.id)
   end
 end

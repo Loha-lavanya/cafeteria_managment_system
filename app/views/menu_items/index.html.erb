@@ -1,9 +1,9 @@
 <nav class="navbar navbar-dark bg-dark">
-<%=link_to "CATEGORIES",menu_categories_path ,class:"navbar-brand"%>
+<h4><%=link_to "CATEGORIES",menu_categories_path ,class:"navbar-brand"%></h4>
 <%=link_to " CART", cart_path(@current_cart) ,class:"navbar-brand"%>
 <%=link_to " LOGOUT", destroy_session_path, method: :delete ,class:"navbar-brand"%>
-<%=link_to " UPDATE PROFILE", edit_users_path(id: @current_user.id),class:"navbar-brand" %>
-<%=link_to " MY PROFILE", "#" ,class:"navbar-brand"%>
+<%=link_to " UPDATE PROFILE", edit_user_path(id: @current_user.id),class:"navbar-brand" %>
+<%=link_to " MY PROFILE", user_path(@current_user.id) ,class:"navbar-brand"%>
 </nav>
 <div class="row full-height">
 <div class="col s9 full-height scroll-bar">

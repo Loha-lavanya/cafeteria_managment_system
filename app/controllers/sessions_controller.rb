@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       if user.role == "admin"
         redirect_to "/admin"
       else
-        redirect_to "/menu"
+        redirect_to menu_items_path
       end
     else
       flash[:error] = "Something went wrong! Try Again"

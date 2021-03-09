@@ -1,9 +1,11 @@
-<h4>Edit Profile</h4>
 
+<div class="container">
+<p class="NewUsers-title">Edit Profile!</p>
 
+<%= @user.id%>
 <section class="UsersNew">
-<%= form_with url: update_users_path(id: @current_user.id) do |form|%>
-<div class="Form-sectiousern">
+<%= form_with url: user_path(:id=>"#{@user.id}"), method: :put do |form|%>
+<div class="Form-section">
 <p class="FormInput-label">Name: </p>
 <%= form.text_field :name, class:"Form-input" %>
 </div>
@@ -19,8 +21,9 @@
 </div>
 
 <div class="Form-section">
-<%= form.submit "Save Changes", :class => "btn waves-effect waves-light" %>
+<%= form.submit "Save Changes!", class:"Form-submit" %>
 </div>
 
 <% end %>
 </section>
+</div>

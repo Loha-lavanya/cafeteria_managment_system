@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def order_created
-    @order = Order.new(:date => Time.now, :user_id => session[:current_user_id])
+    @order = Order.new(:date => Time.now, :user_id => session[:current_user_id], :total_price => 0.0)
     @order.save
   end
 end
