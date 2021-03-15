@@ -17,7 +17,7 @@ class UsersController < ApplicationController
         role: "user",
         password: params[:password],
       )
-      UserMailer.signup_confirmation(user).deliver
+      # UserMailer.signup_confirmation(user).deliver
     end
     redirect_to "/"
   end
@@ -28,9 +28,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    #user = User.find(@current_user.id)
-    # @user = User.find(params[:id])
-
     @user.name = params[:name]
     @user.email = params[:email]
     @user.password_digest = params[:password_digest]

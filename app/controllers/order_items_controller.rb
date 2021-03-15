@@ -1,6 +1,8 @@
 class OrderItemsController < ApplicationController
   before_action :order_created
 
+  before_action :ensure_user_logged_in
+
   def create
     @total = @current_cart.sub_total
     @current_cart.cart_items.each do |cart_item|
@@ -23,6 +25,9 @@ class OrderItemsController < ApplicationController
 
     Cart.destroy(session[:current_cart_id])
     session[:current_cart_id] = nil
+
+    pending_order = PendingOrder.new(:order_id => @order.id)
+    pending_order.save
     #render plain: "Succesfully Placed Your Order"
     render template: "order_items/show"
   end

@@ -8,6 +8,7 @@
   <tr>
     <th scope="col">id</th>
     <th scope="col">name</th>
+    <th colspan="1"></th>
   </tr>
 </thead>
 <tbody>
@@ -15,6 +16,8 @@
   <tr>
     <td><%= category.id %></td>
     <td><%= category.name %></td>
+    <td><%= button_to "edit","#",class:"btn-primary "%></td>
+
   </tr>
 <% end %>
 </tbody>

@@ -1,10 +1,9 @@
 
 <div class="container">
-<p class="NewUsers-title">Create new item</p>
+<p class="NewUsers-title">Update menu item</p>
 
 <section class="UsersNew">
-<%= form_with url: menu_items_path do |form|%>
-
+<%= form_with url: menu_item_path(:id=>"#{@menu_item.id}"), method: :put do |form|%>
 <div class="Form-section">
 <p class="FormInput-label">menu_category </p>
 <%= form.text_field :menu_category_id, class:"Form-input" %>

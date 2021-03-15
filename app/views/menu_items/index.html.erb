@@ -1,10 +1,25 @@
-<nav class="navbar navbar-dark bg-dark">
+
+<nav class="navbar navbar-pf-vertical">
+
+ <div class="navbar-header">
+    <button type="button" class="navbar-toggle">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    </nav>
+<nav class="navbar navbar-light bg-dark">
+<div class="col s9 full-height scroll-bar">
 <h4><%=link_to "CATEGORIES",menu_categories_path ,class:"navbar-brand"%></h4>
 <%=link_to " CART", cart_path(@current_cart) ,class:"navbar-brand"%>
 <%=link_to " LOGOUT", destroy_session_path, method: :delete ,class:"navbar-brand"%>
 <%=link_to " UPDATE PROFILE", edit_user_path(id: @current_user.id),class:"navbar-brand" %>
 <%=link_to " MY PROFILE", user_path(@current_user.id) ,class:"navbar-brand"%>
+
 </nav>
+
+<section class="menu">
 <div class="row full-height">
 <div class="col s9 full-height scroll-bar">
 <div class=menu>
@@ -25,6 +40,7 @@
     </div>
       <div class="card-action">
         <%= button_to "Add to cart", cart_items_path(menu_item_id: menu_item.id), method: :post %>
+
     </div>
   </div>
 <% end %>
@@ -32,3 +48,5 @@
 </div>
 </div>
 </div>
+<section>
+<%= bootstrap_icon "check",width:5,height:5,fill:"blue" %>

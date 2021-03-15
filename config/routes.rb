@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "admin/orders" => "admin#orders", as: :admin_orders
   get "admin/users" => "admin#users", as: :admin_users
   get "admin/categories" => "admin#category", as: :admin_categories
+  delete "pending_orders" => "pending_orders#delivered", as: :pending_orders
   resources :users
   resources :orders
   resources :menu_items

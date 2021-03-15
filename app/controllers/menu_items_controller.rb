@@ -8,7 +8,7 @@ class MenuItemsController < ApplicationController
   end
 
   def show
-    @menu_item = MenuItem.find params[:id]
+    @menu_item = MenuItem.find (params[:id])
   end
 
   def new
@@ -17,15 +17,13 @@ class MenuItemsController < ApplicationController
 
   def edit
     @menu_item = MenuItem.find(params[:id])
-    render template: "menu_items/new"
   end
 
   def destroy
     menu_item = MenuItem.find(params[:id])
-    if menu_item
-      menu_item.destroy
+    if menu_item.destroy
       flash[:success] = "#{menu_item.name} has been deleted."
-      redirect_to menu_items_path
+      redirect_to admin_dashboard_path
     else
       flash[:error] = "An error occured. Try deleting #{@menu_item.name} again."
     end
@@ -33,22 +31,28 @@ class MenuItemsController < ApplicationController
 
   def update
     @menu_item = MenuItem.find(params[:id])
-    if @menu_item
-      save_menu_item
+    @menu_item.menu_category_id = params[:menu_category_id],
+                                  @menu_item.name = params[:name],
+                                  @menu_item.price = params[:price],
+                                  @menu_item.description = params[:description],
+                                  @menu_item.menu_item_image = params[:image],
+    if @menu_item.save
+      flash[:success] = "Menu Item updated succesfully"
     else
       flash[:error] = "An error occured. Try adding #{@menu_item.name} again."
     end
-    redirect_to menu_items_path
+    redirect_to admin_dashboard_path
   end
 
   def create
-    @menu_item = MenuItem.create(menu_item_params)
-    redirect_to menu_items_path
-  end
-
-  private
-
-  def menu_item_params
-    params.require(:menu_item).permit(:menu_category_id, :name, :description, :price, :menu_item_image)
+    menu_item = MenuItem.create!(
+      menu_category_id: params[:menu_category_id],
+      name: params[:name],
+      price: params[:price],
+      description: params[:description],
+      menu_item_image: params[:image],
+    )
+    flash[:success] = "sucessfully item added!"
+    #redirect to admin_dashboard_path
   end
 end
